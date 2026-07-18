@@ -7,7 +7,11 @@ app = FastAPI()
 class VoiceRequest(BaseModel):
     text: str
 
+from services.calendar import CalendarService
 
+calendar = CalendarService()
+
+print(calendar)
 
 @app.post("/voice")
 async def voice(request: VoiceRequest):

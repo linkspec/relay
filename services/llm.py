@@ -9,7 +9,11 @@ class LLM:
 
         response = self.client.responses.create(
             model="gpt-5.5",
-            input=prompt
+            input=prompt,
+            tools=[
+                tool.definition
+                for tool in TOOLS.values()
+            ]
         )
 
         return response.output_text
