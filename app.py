@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import logger
+import logging
 
 from services.llm import LLMService
 
