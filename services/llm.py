@@ -5,6 +5,9 @@ from config import settings
 from tools.registry import execute, get_llm_tools
 import tools
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 class LLMService:
     def __init__(self):
@@ -25,12 +28,14 @@ class LLMService:
         print("\n=== Messages ===")
         pprint(messages)
 
+        logger.info("Calling Ollama")
         response = self.client.chat(
             model=self.model,
             messages=messages,
             tools=get_llm_tools(),
             think=False,
         )
+        logger.info("Ollama returned")
 
         print("\n=== Response ===")
         pprint(response)
@@ -53,11 +58,13 @@ class LLMService:
             name = tool_call.function.name
             arguments = tool_call.function.arguments
 
+            logger.info("Executing tool")
             result = execute(
                 name,
                 **arguments,
             )
-
+            logger.info("Tool finished")
+            
             results.append(
                 {
                     "role": "tool",
