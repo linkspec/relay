@@ -1,24 +1,31 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import services.llm
+
+from services.llm import LLMService
+
 
 app = FastAPI()
+
+llm = LLMService()
+
 
 class VoiceRequest(BaseModel):
     text: str
 
-from services.calendar import CalendarService
 
-calendar = CalendarService()
+class VoiceResponse(BaseModel):
+    response: str
 
-print(calendar)
 
-@app.post("/voice")
+@app.post("/voice", response_model=VoiceResponse)
 async def voice(request: VoiceRequest):
+    reply = llm.chat([
+        {
+            "role": "user",
+            "content": request.text,
+        }
+    ])
 
-    print(request.text)
-
-    return {
-        "success": True,
-        "spoken": f"You said '{request.text}'"
-    }
+    return VoiceResponse(
+        response=reply
+    )

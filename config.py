@@ -2,9 +2,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # OpenAI
-    openai_api_key: str
+    # CA
+    internal_ca: str = "certs/root_ca.crt"
 
+    # LLM
+    ollama_url: str
+    ollama_model: str
+    
     # Baïkal
     caldav_url: str
     caldav_username: str
@@ -16,6 +20,11 @@ class Settings(BaseSettings):
 
     # Node-RED
     node_red_url: str
+
+    # Vikunja 
+    vikunja_api_key: str
+    vikunja_url: str
+
 
     model_config = SettingsConfigDict(
         env_file=".env",
