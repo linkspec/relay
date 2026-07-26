@@ -20,6 +20,7 @@ icalendar-searcher==1.0.6
 idna==3.18
 jh2==5.0.13
 jiter==0.16.0
+logger==1.4
 lxml==6.1.1
 marshmallow==3.26.2
 niquests==3.20.1
