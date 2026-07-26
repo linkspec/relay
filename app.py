@@ -9,6 +9,7 @@ app = FastAPI()
 
 llm = LLMService()
 
+logger = logging.getLogger(__name__)
 
 class VoiceRequest(BaseModel):
     text: str
