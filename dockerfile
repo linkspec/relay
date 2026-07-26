@@ -17,4 +17,4 @@ COPY config.py .
 
 EXPOSE 8000
 
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-w", "1", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-w", "1", "--capture-output", "--log-level", "info", "-b", "0.0.0.0:8000", "app:app"]
